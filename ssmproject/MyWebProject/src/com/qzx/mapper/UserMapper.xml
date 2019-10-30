@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qzx.dao.UserDao">
+
+<insert id="insert" parameterType="user">
+insert into userinfo(username,password,name,sex,age,mail,pic) 
+values(#{username},#{password},#{name},#{sex},#{age},#{mail},#{pic})
+</insert>
+
+<update id="updatePerson" parameterType="user" >
+update userinfo set name=#{name},sex=#{sex},age=#{age},mail=#{mail},pic=#{pic} where username=#{username}
+</update>
+
+<update id="updatePassword" parameterType="string">
+update userinfo set password=#{password} where username=#{username}
+</update>
+
+<select id="findUser" resultType="int">
+select count(*) from userinfo where username=#{username} and password=#{password}
+</select>
+
+<select id="findUserByUserName" resultType="int" parameterType="string">
+select count(*) from userinfo where username=#{username}
+</select>
+
+<select id="find" resultType="user">
+select username,password,name,sex,age,mail,pic from userinfo where username=#{username} and password=#{password}
+</select>
+
+
+<select id="campusInfo" resultType="campus">
+select * from campusevent
+</select>
+
+<select id="goodsInfos" resultType="goodsInfo">
+select * from goods
+</select>
+
+<insert id="insertGoods" parameterType="goodsInfo">
+insert into goods(time,pic,word) values(#{time},#{pic},#{word})
+</insert>
+</mapper>
